@@ -10,9 +10,15 @@ import java.awt.event.MouseMotionListener;
 public class WhiteBoard implements MouseMotionListener,MouseListener{
 	private static Color drawColor = Color.black;
 	static int size = 30;
+	private int thisx;
+	private int thisy;
 	
 	public static MouseEvent a;
-		
+	
+	public void recodthis(int x, int y){
+		thisx = x;
+		thisy = y;
+	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		int x = e.getX();
@@ -23,13 +29,9 @@ public class WhiteBoard implements MouseMotionListener,MouseListener{
 		g.fillOval(x, y, size, size);
 		
 	}
-	
 	@Override
-	public void mouseMoved(MouseEvent e) {
-	}
-	
-	public static void getAppletSize(){
-		
+	public void mousePressed(MouseEvent e) {
+		this.a = e;		
 	}
 	
 	public static void bigger(){
@@ -49,13 +51,7 @@ public class WhiteBoard implements MouseMotionListener,MouseListener{
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		this.a = e;
-		System.out.println("hello1");
+		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -73,5 +69,14 @@ public class WhiteBoard implements MouseMotionListener,MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+
 	
 }
