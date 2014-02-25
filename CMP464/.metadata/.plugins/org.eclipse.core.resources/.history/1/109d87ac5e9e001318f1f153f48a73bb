@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   
+     
+    <PreferenceCategory android:title="Button's Style" >
+        <CheckBoxPreference
+            android:title="Main Activity"
+            android:defaultValue="false"
+            android:key="styleForMainActivity"         
+            android:summary="Lock The Screen With Password"
+             >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:title="Main Activity"
+            android:defaultValue="false"
+            android:key="styleForActivity2"
+            android:summary="Lock The Screen With Password"
+             >
+        </CheckBoxPreference>
+
+        <ListPreference
+            android:key="prefUpdateFrequency"
+            android:title="Reminder for Updation"
+            android:summary="Set Update Reminder Frequency"
+            android:entries="@array/updateFrequency"
+            android:entryValues="@array/updateFrequencyValues"
+            />
+    </PreferenceCategory>
+
+</PreferenceScreen>

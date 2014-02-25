@@ -20,7 +20,7 @@ buttonPanel(){
 		Button btn1 = new Button("bigger");
 		Button btn2 = new Button("smaller");
 		Button btn3 = new Button("Color");
-		Button btn4 = new Button("Text");
+		Button btn4	= new Button("Text");
 		add(btn);
 		add(btn1);
 		add(btn2);
@@ -36,11 +36,13 @@ buttonPanel(){
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand()=="Clear"){		
+		if(e.getActionCommand()=="Clear"){
+			double x =super.getSize().getHeight();
+			double y =super.getSize().getWidth();
 			Applet app = (Applet)WhiteBoard.a.getSource();
 			Graphics g = app.getGraphics();
 			g.setColor(Color.white);
-			g.fillRect(0, 0,app.getSize().width,app.getSize().height);
+			g.fillRect(0, 0,(int) y,(int) x);
 							
 		}
 		if(e.getActionCommand()=="bigger"){
@@ -53,6 +55,8 @@ buttonPanel(){
 		if(e.getActionCommand()=="Color"){
 			WhiteBoard.changeColor(JColorChooser.showDialog(this,"CHOOSE",WhiteBoard.getColor()));
 			//x.changeColor(JColorChooser.showDialog(this,"CHOOSE",Color.red));
+			
+			
 		}
 		if(e.getActionCommand()=="Text"){
 			WhiteBoard.chageTextColor(JColorChooser.showDialog(this,"CHOOSE",WhiteBoard.getTextColor()));

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML >
+<html>
+<head>
+  <title>Whiteboard Applet</title>
+</head>
+<div align="center">
+<h1>Whiteboard Applet</h1>
+  <tr><td bgcolor="white">
+
+      <applet  code="Drwing.class" width="500" height="300">
+        <b>Sorry, you are using a Java-challenged browser.</b>
+      </applet>
+  </td></tr>
+</table>
+</div>
+</body>
+</html>

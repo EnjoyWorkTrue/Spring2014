@@ -1,0 +1,19 @@
+<!DOCTYPE html5>
+<html>
+<head>
+  <title>Whiteboard Applet</title>
+</head>
+<body bgcolor="#C0C0C0">
+<div align="center">
+<h1>Whiteboard Applet</h1>
+<table border="5" cellpadding="0">
+  <tr><td bgcolor="white">
+
+      <applet codebase="C:/Users/joseph/Documents/GitHub/Spring2014/CMP342/Assignment2/project1/" code="Drwing.class" width="500" height="300">
+        <b>Sorry, you are using a Java-challenged browser.</b>
+      </applet>
+  </td></tr>
+</table>
+</div>
+</body>
+</html>

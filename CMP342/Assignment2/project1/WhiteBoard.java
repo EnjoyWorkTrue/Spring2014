@@ -27,7 +27,7 @@ public class WhiteBoard extends Panel implements MouseMotionListener,MouseListen
 		fm = getFontMetrics(font);
 		setFont(font);
 		setBackground(Color.white);
-		setForeground(drawColor);
+		setForeground(drawColor);		
 		addKeyListener(this);
 	    addMouseMotionListener(this);
 	    addMouseListener(this);
@@ -77,7 +77,8 @@ private void recordPosition(int x, int y) {
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
+		System.out.println("mouseReleased");
 		
 	}
 	@Override
@@ -110,7 +111,6 @@ private void recordPosition(int x, int y) {
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("?");
 		// TODO Auto-generated method stub
 		
 	}
@@ -123,10 +123,7 @@ private void recordPosition(int x, int y) {
 	public static void chageTextColor(Color chooseColor) {
 		textColor=chooseColor;
 		
-	}
-
-	
-	
+	}	
 
 	
 }

@@ -17,7 +17,8 @@ public void init() {
     add(btn,BorderLayout.EAST);
     add(wb,BorderLayout.CENTER);
     
-    
+    System.out.println(getX());
+    System.out.println(getY());
    
    
 }
