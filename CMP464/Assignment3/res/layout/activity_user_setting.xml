@@ -10,6 +10,11 @@
             android:summary="change MainActivity button"
              >
         </CheckBoxPreference>
+        <SwitchPreference
+            android:text="Auto Login"
+            android:checked="false"
+            android:title="Login">
+        </SwitchPreference>
         <CheckBoxPreference
             android:title="Activity 2"
             android:defaultValue="false"

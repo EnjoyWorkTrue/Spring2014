@@ -24,12 +24,13 @@ public class MainActivity extends Activity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	Log.i("MainActivity","Oncreate");
+    	Log.i("MainActivity","Oncrezate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        displayUserSettings();
         buttonAlternative = (Button) findViewById(R.id.button1A);
-        buttonAlternative.setVisibility(buttonAlternative.INVISIBLE);
         buttonNormal = (Button) findViewById(R.id.button1);
+        setButtonVisibility(switchMainActivity);
 		
 	}
     

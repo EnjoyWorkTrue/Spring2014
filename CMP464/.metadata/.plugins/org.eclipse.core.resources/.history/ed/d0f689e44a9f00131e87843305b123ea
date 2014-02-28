@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   
+    <PreferenceCategory android:title="Login" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefLockScreen"
+            android:summary="Auto Login"
+            android:title="Screen Lock" >
+        </CheckBoxPreference>
+        
+        <SwitchPreference
+            android:text="Auto Login"
+            android:checked="false"
+            android:title="Login"
+        </SwitchPreference>
+
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>
