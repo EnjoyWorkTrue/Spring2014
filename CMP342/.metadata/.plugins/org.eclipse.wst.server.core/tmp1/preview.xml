@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<server port="8080">
+  <module context="Assignment3" name="Assignment3" path="C:/Users/joseph/Documents/GitHub/Spring2014/CMP342/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/Assignment3" type="j2ee"/>
+</server>

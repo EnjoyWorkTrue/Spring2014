@@ -1,0 +1,11 @@
+/**
+ * 
+ */
+
+function changeLogin()
+{
+x = document.getElementById("login_right");
+x.a = 1;
+x.src.background(url(loginButton.png));
+
+}

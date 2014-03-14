@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+
+function changeLogin()
+{
+x = document.getElementById("login_right");
+x.a = 1;
+if(x.a==1){
+	x.style.background("url(loginButton.png)");
+	
+	x.innerHTML = "helo";
+}
+else{
+	
+}
+
+}

@@ -1,0 +1,11 @@
+/**
+ * 
+ */
+
+function changeLogin()
+{
+x = document.getElementById("login_right");
+
+x.innerHTML= x.value;;
+
+}

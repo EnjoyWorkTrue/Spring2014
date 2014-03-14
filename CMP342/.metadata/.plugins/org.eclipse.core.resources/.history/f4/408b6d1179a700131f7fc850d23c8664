@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript">
+    var scrollDiv = function(dir, px) {
+        var scroller = document.getElementById('scroller');
+        if (dir == 'l') {
+            scroller.scrollLeft -= px;
+        }
+        else if (dir == 'r') {
+            scroller.scrollLeft += px;
+        }
+    }
+</script>
+
+<style type="text/css">
+    #scroller {
+        width: 970px;
+		height: 513px; 
+        overflow: scroll;
+        margin: 0 auto;
+    }
+    #inner-scroller {
+        width: 8000px;
+        height: 1048px;
+    }
+</style>
+
+</head>
+<body style="text-align: center;">
+
+<a href="javascript: void(0);" onclick="scrollDiv('l', 1771); return false;">scroll left</a>
+|
+<a href="javascript: void(0);" onclick="scrollDiv('r', 1771); return false;"> scroll right</a>
+
+<div id="scroller">
+    <div id="inner-scroller">
+    <div class="slide-img">
+    	<img src="job-student-gap.png">
+    </div> 
+    <div class="slide-img">
+    	<img src="more-jobs-that-students.png">
+    </div> 
+    <div class="slide-img">
+    	<img src="2012-hs-ap-enrollmetn.png">
+    </div> 
+    </div>
+</div>    
+</body>
+</html>

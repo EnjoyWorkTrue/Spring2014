@@ -1,0 +1,16 @@
+/**
+ * 
+ */
+
+function changeLogin(a)
+{
+x = document.getElementById("login_right");
+
+if(a=="on"){
+x.style.background = "url(loginButton.png)";
+}
+else(a="off"){
+x.style.background = "url(loginButton.png)";
+}
+
+}

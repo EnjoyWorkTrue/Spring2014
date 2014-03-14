@@ -1,8 +1,8 @@
 package project1;
 
-import java.applet.Applet;
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Panel;
@@ -12,15 +12,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JColorChooser;
 
 public class buttonPanel extends Panel implements ActionListener{
-
-	
+Button btn3;
+Button btn4;
 buttonPanel(){
 		setLayout(new GridLayout(5,1));
 		Button btn = new Button("Clear");
 		Button btn1 = new Button("bigger");
 		Button btn2 = new Button("smaller");
-		Button btn3 = new Button("Color");
-		Button btn4	= new Button("Text");
+		btn3 = new Button("Pen");
+		btn4	= new Button("Text");
 		add(btn);
 		add(btn1);
 		add(btn2);
@@ -32,17 +32,16 @@ buttonPanel(){
 		btn3.addActionListener(this);
 		btn4.addActionListener(this);
 	}
+
+public void changeButtonColor(Color c){
+	btn3.setBackground(c);
+}
 	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="Clear"){
-			double x =super.getSize().getHeight();
-			double y =super.getSize().getWidth();
-			Applet app = (Applet)WhiteBoard.a.getSource();
-			Graphics g = app.getGraphics();
-			g.setColor(Color.white);
-			g.fillRect(0, 0,(int) y,(int) x);
+			WhiteBoard.eraseEverything();
 							
 		}
 		if(e.getActionCommand()=="bigger"){
@@ -52,15 +51,23 @@ buttonPanel(){
 		{
 			WhiteBoard.smaller();
 		}
-		if(e.getActionCommand()=="Color"){
-			WhiteBoard.changeColor(JColorChooser.showDialog(this,"CHOOSE",WhiteBoard.getColor()));
-			//x.changeColor(JColorChooser.showDialog(this,"CHOOSE",Color.red));
+		if(e.getActionCommand()=="Pen"){
+			
+			WhiteBoard.changeColor( JColorChooser.showDialog(this,"CHOOSE",WhiteBoard.getColor()));
+			changeButtonColor(WhiteBoard.getColor());
 			
 			
 		}
 		if(e.getActionCommand()=="Text"){
-			WhiteBoard.chageTextColor(JColorChooser.showDialog(this,"CHOOSE",WhiteBoard.getTextColor()));
+			Color c = JColorChooser.showDialog(this,"CHOOSE",WhiteBoard.getTextColor());
+			WhiteBoard.chageTextColor(c);
+			changeTextButtonColor(c);
 		}
+		
+	}
+
+	private void changeTextButtonColor(Color c) {
+		btn4.setBackground(c);
 		
 	}
 	

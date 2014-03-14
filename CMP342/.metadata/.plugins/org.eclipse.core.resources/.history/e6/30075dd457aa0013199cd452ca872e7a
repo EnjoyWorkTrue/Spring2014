@@ -1,0 +1,10 @@
+/**
+ * 
+ */
+
+function changeLogin()
+{
+x = document.getElementById(ogr);
+x.innerHTML= "a" == "b";
+
+}

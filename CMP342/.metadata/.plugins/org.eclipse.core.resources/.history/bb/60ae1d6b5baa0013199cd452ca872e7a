@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+
+<title>LJLN-W</title>
+<link rel="stylesheet" type="text/css" href="float.css">
+<script type="text/javascript" src="float.js"></script>
+</head>
+<body>
+<div id="login">
+<div class="login_left"></div>
+<button type="button" id="login_right"  onmouseover="changeLogin('on')" onmouseout="changeLoi"></button>
+</div>
+
+<div id="main">
+<h1 id="main1">This is main</h1>
+</div>
+
+<div class = "hello">
+<div class="simple">
+<p>Hello this is paragraph</p>
+</div>
+<div class="rightsimple">
+<p>Hello this is paragrpah2</p>
+</div>
+</div>
+
+<div class="footer">
+<nav class="elem elem-red">
+<span class="label">nav</span>
+<ul>
+<li>item1</li>
+<li>item2</li>
+<li>item3</li>
+<li>item4</li>
+</ul>
+</nav>
+<section>
+<p>hisajdklasdhis ajdkla sdhisajdklasd hisajdklasd   hisajdklasdhisajdklasdhi sajdkl asdhisaj dklasd hisajdklasdhisa jdklasdhis ajdklas dhisajdklasdhis ajdklasd hisajdklasdhisajdklasd
+</p>
+</section>
+
+
+</div>
+<div class="adver">
+<p>always here</p>
+</div>
+
+</body>
+</html>
