@@ -1,0 +1,54 @@
+package com.example.googlecalendar;
+
+import java.text.DateFormat;
+
+import android.app.Activity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Toast;
+import java.text.Format;
+
+public class MainActivity extends Activity {
+	private Cursor mCursor = null;
+	private static final String[] COLS = new String[]
+			{ CalendarContract.Events.TITLE, CalendarContract.Events.DTSTART};
+
+
+			
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		mCursor = getContentResolver().query(
+				CalendarContract.Events.CONTENT_URI,
+				COLS,
+				null,
+				null,
+				null);
+		mCursor.moveToFirst();
+		
+		
+		
+		
+		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	public void After(View v){
+		if(!mCursor.isLast()) mCursor.moveToNext();
+		Format df = DateFormat.getDateFormat(this);
+		
+	}
+	public void Before(View v){
+		Toast.makeText(this, "hello", 0).show();
+	}
+
+}

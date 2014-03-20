@@ -5,7 +5,7 @@ public class aa {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int[] a = {1,2,3,4,15,14,13,13,12};
+		System.out.println(10.0f);
 		
 	
 	}

@@ -1,0 +1,102 @@
+package utils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import android.util.Log;
+/**
+ * This code is loosely based on the pull parser code from:
+ * http://developer.android.com/reference/org/xmlpull/v1/XmlPullParser.html
+ * @author josh
+ *
+ */
+public class MyPullParser {
+	private ArrayList<RssItem> items = new ArrayList<RssItem>();
+	private String[] listOfTitle = new String[5];
+	private String[] description = new String[5];
+	private int start = 0;
+	private int start1 = 0;
+	private RssItem currentItem = null;
+	public void parse(String url) throws XmlPullParserException, IOException{
+		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		XmlPullParser xpp = factory.newPullParser();
+
+		xpp.setInput(new URL(url).openStream(),null);
+		int eventType = xpp.getEventType();
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			if(eventType == XmlPullParser.START_DOCUMENT) {
+				Log.i("MyPullParser","Start document");
+			} else if(eventType == XmlPullParser.START_TAG) {
+				Log.d("MyPullParser", xpp.getName());
+				if(xpp.getName().equals("item")){
+					currentItem = new RssItem();
+				}
+				else if(xpp.getName().equals("title") && currentItem != null){
+					currentItem.title = xpp.nextText();
+					this.append(currentItem.title);				
+				}else if(xpp.getName().equals("description") && currentItem != null){
+					currentItem.description = xpp.nextText();
+					this.append_des(currentItem.description);
+					Log.e("MyPullParser",currentItem.description);					
+				}
+			} else if(eventType == XmlPullParser.END_TAG) {
+				if(xpp.getName().equals("item")){
+					items.add(currentItem);
+				}
+			}
+			eventType = xpp.next();
+		}
+		Log.i("MyPullParser","End document");
+		Log.i("MyPullParser","We received: "+items.size());
+	}
+	private void append(String title) {
+		if(listOfTitle.length==start){
+			String[] prep = listOfTitle;
+			listOfTitle = new String[start*2];
+			for(int i = 0; i<prep.length;i++){
+				listOfTitle[i] = prep[i];
+			}
+		}
+		listOfTitle[start] = title;
+		start++;
+		
+	}
+	private void append_des(String des) {
+		if(description.length==start1){
+			String[] prep = description;
+			description = new String[start1*2];
+			for(int i = 0; i<prep.length;i++){
+				description[i] = prep[i];
+			}
+		}
+		description[start1] = des;
+		start1++;
+		
+	}
+	public String[] getDescription(){
+		String[] des = new String[items.size()];
+		for(int i=0; i<des.length;i++){
+			des[i] = items.get(i).description;
+		}
+		return des;
+	}
+	
+	public ArrayList<RssItem> getItems(){
+		return items;
+	}
+	public String[] getTitle() {
+		String[] prep = new String[start];
+		for(int i=0; i<start;i++){
+			prep[i] = listOfTitle[i];
+		}
+		return prep;
+	}
+}

@@ -2,21 +2,24 @@ package com.example.assignment4;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.xmlpull.v1.XmlPullParserException;
-
 import utils.MyPullParser;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+
+
+public class MainActivity extends Activity{
 	ArrayAdapter<String> mAdapter;
-	public static String[] titles;
-	@Override
+	ListView lv;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -30,8 +33,7 @@ public class MainActivity extends Activity {
 					MainActivity.this.runOnUiThread(new Runnable(){
 						@Override
 						public void run() {
-							titles = parser.getTitle();
-							
+							setUpUiAfterParse(parser);
 						}
 					});
 				} catch (XmlPullParserException e) {
@@ -43,15 +45,28 @@ public class MainActivity extends Activity {
 				}
 			}
         })).start();
-        mAdapter = new ArrayAdapter<String>(this, 
+       
+    }
+ 
+    private void setUpUiAfterParse(final MyPullParser parser){
+		
+		mAdapter = new ArrayAdapter<String>(this, 
 				android.R.layout.simple_list_item_1, 
-				new ArrayList<String>(Arrays.asList(titles)));
-        ListView lv = (ListView) findViewById(R.id.list_view);
+				new ArrayList<String>(parser.getTitle()));
+        lv = (ListView) findViewById(R.id.list_view);
         lv.setAdapter(mAdapter);
-    }
-    /**
-     * set up the ui after we've downloaded and parsed the rss feed
-     * @param parser
-     */
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				Intent intent = new Intent(MainActivity.this,DescriptionActivity.class);
+				intent.putExtra("des", parser.getDescription()[position]);
+				intent.putExtra("title",parser.getTitle().get(position));
+				startActivity(intent);
+				
+			}
+        	
+		});
     }
+}

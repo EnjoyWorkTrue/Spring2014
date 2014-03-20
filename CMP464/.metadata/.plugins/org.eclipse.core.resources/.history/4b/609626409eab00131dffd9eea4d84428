@@ -1,0 +1,19 @@
+package utils;
+
+import com.google.gdata.client.*;
+import com.google.gdata.client.calendar.*;
+import com.google.gdata.data.*;
+import com.google.gdata.data.acl.*;
+import com.google.gdata.data.calendar.*;
+import com.google.gdata.data.extensions.*;
+import com.google.gdata.util.*;
+import java.net.URL;
+
+public class googleCalendar {
+	CalendarService client;
+	
+	public googleCalendar(){
+	client = new CalendarService("My First App");
+	client.setUserCredentials("dldytpq234@gmail.com","dlfdlf11");
+	}
+}
