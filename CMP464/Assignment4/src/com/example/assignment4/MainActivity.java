@@ -19,6 +19,7 @@ import android.widget.ListView;
 public class MainActivity extends Activity{
 	ArrayAdapter<String> mAdapter;
 	ListView lv;
+	String sw = "hihi";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,6 @@ public class MainActivity extends Activity{
 			@Override
 			public void run() {
 				try {
-					Log.i("main","run");
 					final MyPullParser parser = new MyPullParser();
 					parser.parse("http://rss.cnn.com/rss/cnn_topstories.rss");
 					MainActivity.this.runOnUiThread(new Runnable(){
