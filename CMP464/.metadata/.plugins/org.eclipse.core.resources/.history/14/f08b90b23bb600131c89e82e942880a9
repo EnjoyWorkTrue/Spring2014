@@ -1,0 +1,31 @@
+package utils;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class DialogButton extends AlertDialog.Builder {
+	Context ctx;
+	public DialogButton(Context arg0) {
+		super(arg0);
+		ctx = arg0;
+	}
+	@Override
+	public AlertDialog create() {
+		setNegativeButton("Cancle", null);
+        final EditText edit = new EditText(ctx);
+        edit.setText("hello");
+        edit.setTextSize(30);
+        setView(edit);
+        setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+            	Toast.makeText(ctx, "toast", 0).show();
+            }
+        }).show();
+		return super.create();
+	}
+
+}

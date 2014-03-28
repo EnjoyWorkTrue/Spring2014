@@ -1,0 +1,5 @@
+ackage utils;
+
+public interface getCusor {
+
+}
