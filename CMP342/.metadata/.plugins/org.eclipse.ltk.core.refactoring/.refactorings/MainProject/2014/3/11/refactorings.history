@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;MainProject/WebContent/WEB-INF/img/제목 없음.png&apos; to &apos;login&apos;" description="Rename resource &apos;제목 없음.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/WEB-INF/img/제목 없음.png" name="login" stamp="1394903161889" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;MainProject/WebContent/WEB-INF/img/login&apos; to &apos;login.png&apos;" description="Rename resource &apos;login&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/WEB-INF/img/login" name="login.png" stamp="1394903169529" updateReferences="true"/>
+</session>

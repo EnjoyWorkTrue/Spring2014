@@ -1,0 +1,55 @@
+#login{
+	position: relative;
+	height:30px;
+	weight:100%;
+}
+#loginImage{
+	position: static;
+	height:30px;
+	float: right;
+	background: #aaa;
+}
+
+#main{
+	background: #aa0;
+	text-align:center;
+	height:100px;
+	max-height:300px;
+}
+
+.simple{
+	float:left;
+	width:50%;
+	height:120px;
+	background: #aaa;
+}
+.rightsimple{
+	margin-left:50%;
+	width:50%;
+	height:120px;
+	background: #ccc;
+	margin-bottom: 30px;	
+}
+.footer{
+	clear:left;
+	position: relative;
+	height:300px;
+	background: #a0a;
+	padding: 40px;
+}
+nav{
+	position: absolute;
+	left: 0px;
+	width: 200px;
+}
+section{
+	margin-left: 200px;
+}
+.adver{
+	position:fixed;
+	right:0;
+	bottom: 0;
+	height:50px;
+	background: #11a;
+
+}

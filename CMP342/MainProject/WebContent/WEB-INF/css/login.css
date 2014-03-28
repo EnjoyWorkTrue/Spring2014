@@ -1,0 +1,36 @@
+#head{
+	/*background:#aaa;*/
+	height:70px;
+	
+}
+#body{
+	text-align:center;
+	/*background:#ccc;*/
+	height:400px;
+	width:100%;
+}
+#background{
+	
+	margin-left:30%;
+	width:500px;
+	height:500px;
+	background-size: 100% 100%;
+	background-image:url("picture/login.png");
+}
+
+#text1{
+	position:relative;
+	top: 45%;
+	left: 25%;	
+}
+#text2{
+	position:relative;
+	top:67%;
+	right:6%;
+	}
+
+#tail{
+	/*background: #aaa;*/
+	height:60px;
+	margin:10px;
+}

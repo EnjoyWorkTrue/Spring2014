@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<script type="text/javascript" src="C:\Users\joseph\Documents\GitHub\Spring2014\CMP342\MainProject\WebContent\WEB-INF\js\main.js"></script>
+
+<title>Mooc</title>
+</head>
+<body>
+<input type = "button" value="How Much Did You Win?" onclick="showWinnings1()"/>
+<input type = "button" value="How Much Did You Win?" onclick="showWinnings2()"/>
+<form>
+  First name: <input type="text" id = "fname" name="fname"><br>
+  Last name: <input type="text" id = "lname" name="lname"><br>
+  <input type="submit" value="Submit" onclick="show1()">
+</form>
+</body>
+</html>

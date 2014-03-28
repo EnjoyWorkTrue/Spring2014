@@ -6,10 +6,9 @@ INDEX VERSION 1.126+C:\Users\joseph\Documents\GitHub\Spring2014\CMP342\.metadata
 3511417993.index
 3345974110.index
 2585219214.index
+698243390.index
 3353951665.index
-3924426388.index
 1153757329.index
-2666450434.index
 4137496317.index
 2135541764.index
 1366307325.index

@@ -1751,6 +1751,7 @@ pymysql.tests.thirdparty.test_MySQLdb.test_MySQLdb_dbapi20|C:\Python33\lib\site-
 pymysql.tests.thirdparty.test_MySQLdb.test_MySQLdb_nonstandard|C:\Python33\lib\site-packages\pymysql\tests\thirdparty\test_MySQLdb\test_MySQLdb_nonstandard.py
 pymysql.times|C:\Python33\lib\site-packages\pymysql\times.py
 pymysql.util|C:\Python33\lib\site-packages\pymysql\util.py
+pymysql1|C:\Python33\pymysql1.py
 python3|C:\Python33\DLLs\python3.dll
 queue|C:\Python33\lib\queue.py
 quopri|C:\Python33\lib\quopri.py
