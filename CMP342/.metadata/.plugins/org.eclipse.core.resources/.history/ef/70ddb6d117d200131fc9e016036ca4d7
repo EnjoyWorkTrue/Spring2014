@@ -1,0 +1,67 @@
+package Client;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class ChatClient implements Runnable{
+
+	private Socket socket;
+	private DataOutputStream streamOut;
+	private Thread thread;
+	private boolean done;
+	private ChatClinetThread client;
+	
+	
+	public ChatClient(String serverName, int serverPort){
+		
+		try{
+			socket = new Socket(serverName, serverPort);
+			System.out.println("Connected to socket: " + socket);
+			start();
+		}
+		catch(UnknownHostException uhe){
+			System.out.println("Error Unknown Host: "+ uhe.getMessage());
+		}
+		catch(IOException ioe){
+			System.out.println("Unexpected exception: "+ ioe.getMessage());
+		}
+			
+		
+	}
+	private void start() throws IOException {
+		streamOut = new DataOutputStream(socket.getOutputStream());
+		if(thread == null){
+			client = new ChatClinetThread(this,socket);
+			thread = new Thread(this);
+			thread.start();
+		}
+		
+	}
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void stop() {
+		done = true;
+		if(thread!=null){
+			thread =null;
+		}
+	
+		if(streamOut != null)
+			try {
+				streamOut.close();
+				if(socket != null) socket.close();
+				if(client != null) client = null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	
+	}
+
+}

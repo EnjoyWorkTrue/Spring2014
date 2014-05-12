@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./css/basic_forms.css"
+      type="text/css"/>
+</head>
+<body>
+
+
+<form name="mail" action="mailto:someone@somewhere.com" method="post" enctype="text/plain" >
+
+	<h4>Enter your contact information below:</h4>
+		<label for="firstname">FirstName:</label>
+		<input type="text" name="FirstName">
+		<label for="lastname">LastName:</label>
+		<input type="text" name="LastName">
+		<label for="street">Street:</label>
+		<input type="text" name="Street">
+		<label for="city">City:</label>
+		<input type="text" name="City">
+		<label for="state">State:</label>
+		<input type="text" name="State">
+		<label for="email">User Email:</label>
+		<input type="text" name="Email">
+<br>
+	<h4>Select your filling and icing below:</h4>
+<table>
+<tr>
+<th align="left">Filling</th><th align="left">Icing Color</th>
+</tr>
+<tr>
+<td>
+	<label>Chocolate:</label>
+	<input  class="vertical" type="checkbox" name="filling" value="chocolate">
+
+	<label>Vanilla:</label>
+	<input  class="vertical" type="checkbox" name="filling" value="vanilla">
+
+	<label>Banana:</label>
+	<input  class="vertical" type="checkbox" name="filling" value="banana">
+
+	<label>Strawberry:</label>
+	<input  class="vertical" type="checkbox" name="filling" value="strawberry">
+</td>
+<td>
+	<label>Blue:</label>
+	<input  class="vertical" type="radio" name="color" value="blue">
+
+	<label>Red:</label>
+	<input  class="vertical" type="radio" name="color" value="red">
+
+	<label>Yellow:</label>
+	<input  class="vertical" type="radio" name="color" value="yellow">
+
+	<label>Green:</label>
+	<input  class="vertical" type="radio" name="color" value="green">
+
+</td>
+</tr>
+
+</table>
+<br>
+
+	<label>Special Requests:</label>
+	<textarea rows="5" cols="50" name="specialInfo"></textarea>
+<br>
+<br> 
+   <div class="button">
+        <button type="submit">Send your Order via Email</button>
+        <button type="reset" onclick="clearForm(this.form);">Reset Form</button>
+    </div>
+</form>
+</body>
+</html>

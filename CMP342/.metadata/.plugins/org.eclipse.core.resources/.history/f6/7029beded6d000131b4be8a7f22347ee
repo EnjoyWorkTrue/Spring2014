@@ -1,0 +1,194 @@
+package ClientApp;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.GridLayout;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
+
+import javax.swing.JApplet;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import Interface.toChatApp;
+import ServerandClient.ChatClient;
+
+public class ClientApp extends JApplet implements ActionListener,KeyListener,toChatApp{
+	Button connect;
+	Button send;
+	JScrollPane scroll;
+	JTextArea output;
+	JTextArea input;
+	JTextArea nickName;
+	JLabel nickname_label;
+	JLabel[] nickname_list;
+	Panel nicknameP;
+	int count = 1;
+	boolean connected = false;
+	
+	private ChatClient client;
+	public void init(){
+		setSize(400,400);
+		setLayout(new BorderLayout());
+		// Panel 1 for input | send | connect ?? South
+		Panel p1 = new Panel(new BorderLayout());
+		input = new JTextArea();
+		connect = new Button("Connect");
+		send = new Button("Send");
+		p1.add(input,BorderLayout.CENTER);
+		Panel buttonP = new Panel(new GridLayout(0,2));
+		send.setEnabled(false);
+		buttonP.add(send);
+		buttonP.add(connect);
+		p1.add(buttonP,BorderLayout.EAST);
+		
+		
+		// Panel 2  NickName Label | nickName
+		Panel p2 = new Panel(new BorderLayout());
+		nickName = new JTextArea();
+		nickname_label = new JLabel("NickName: ");
+		p2.add(nickname_label,BorderLayout.WEST);
+		p2.add(nickName,BorderLayout.CENTER);
+		
+		
+		
+		
+		// outputArea
+		output = new JTextArea();
+		output.setEditable(false);
+		
+		
+		// nickName Group
+		nickname_list = new JLabel[10];
+		nickname_list[0] = new JLabel("GROUPPPPING  ");
+		nicknameP = new Panel(new GridLayout(10,0));
+		nicknameP.add(nickname_list[0]);
+
+		
+		         add(p1,BorderLayout.SOUTH);
+		add(output,BorderLayout.CENTER); add(nicknameP,BorderLayout.EAST); 
+		         add(p2,BorderLayout.NORTH);
+		         
+		send.addActionListener(this);
+		connect.addActionListener(this);
+		input.addKeyListener(this);
+	}
+	
+	
+	
+	
+	// for key board
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		if(e.getKeyCode()==10 && connected){
+		try {
+			client.sendMessage(input.getText());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	// for click
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==send){
+			try {
+				client.sendMessage(input.getText());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		if(e.getSource()==connect){
+			tryConnect();
+		}
+		
+	}
+	private void tryConnect() {
+		if(nickName.getText().equals("")){
+		output.setText("need NickName");
+		}
+		client = new ChatClient("0.0.0.0",8080,this);
+		nickname_list[1] = new JLabel("Me: "+nickName.getText());
+		addUser("Me: " + nickName.getText());
+		connected = true;
+		connect.setEnabled(false);
+		send.setEnabled(true);
+		try {
+			client.sendNickname(nickName.getText());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		nickName.setEditable(false);
+		
+		
+		
+	}
+
+
+
+
+	private void addUser(String nickname){
+		if(count<nickname_list.length){
+			getContentPane().remove(nicknameP);
+			nickname_list[count] = new JLabel(nickname);
+			nicknameP.add(nickname_list[count]);
+			count++;
+			getContentPane().add(nicknameP,BorderLayout.EAST);
+			validate();
+			repaint();
+		}
+		
+	}
+
+
+
+
+	@Override
+	public void sendMessage(String message) {
+		if(message.contains("joseph is hot!!!")){
+			getNickname(message);
+		}
+		
+		else
+		output.append(message+"\n");
+		input.setText("");
+		
+	}
+
+
+
+
+	private void getNickname(String message) {
+		String s = "";
+		for(int i = 17; i<message.length();i++){
+			s = s+message.charAt(i);
+		}
+		addUser(s);
+
+		
+	}
+
+}

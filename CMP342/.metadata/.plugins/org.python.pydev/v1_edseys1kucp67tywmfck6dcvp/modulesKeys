@@ -1751,15 +1751,12 @@ pymysql.tests.thirdparty.test_MySQLdb.test_MySQLdb_dbapi20|C:\Python33\lib\site-
 pymysql.tests.thirdparty.test_MySQLdb.test_MySQLdb_nonstandard|C:\Python33\lib\site-packages\pymysql\tests\thirdparty\test_MySQLdb\test_MySQLdb_nonstandard.py
 pymysql.times|C:\Python33\lib\site-packages\pymysql\times.py
 pymysql.util|C:\Python33\lib\site-packages\pymysql\util.py
-pymysql1|C:\Python33\pymysql1.py
 python3|C:\Python33\DLLs\python3.dll
 queue|C:\Python33\lib\queue.py
 quopri|C:\Python33\lib\quopri.py
 random|C:\Python33\lib\random.py
 re|C:\Python33\lib\re.py
 reprlib|C:\Python33\lib\reprlib.py
-review1 3.13|C:\Python33\review1 3.13.py
-review3 3.13|C:\Python33\review3 3.13.py
 rlcompleter|C:\Python33\lib\rlcompleter.py
 runpy|C:\Python33\lib\runpy.py
 sched|C:\Python33\lib\sched.py
@@ -2491,6 +2488,7 @@ warnings|C:\Python33\lib\warnings.py
 wave|C:\Python33\lib\wave.py
 weakref|C:\Python33\lib\weakref.py
 webbrowser|C:\Python33\lib\webbrowser.py
+what|C:\Python33\what.py
 winsound|C:\Python33\DLLs\winsound.pyd
 wsgiref.__init__|C:\Python33\lib\wsgiref\__init__.py
 wsgiref.handlers|C:\Python33\lib\wsgiref\handlers.py

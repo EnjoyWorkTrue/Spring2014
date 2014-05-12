@@ -1,0 +1,31 @@
+package Client;
+
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class ChatClient implements Runnable{
+
+	private Socket socket;
+	public ChatClient(String serverName, int serverPort){
+		
+		try{
+			socket = new Socket(serverName, serverPort);
+			System.out.println("Connected to socket: " + socket);
+			start();
+		}
+		catch(UnknownHostException uhe){
+			System.out.println("Error Unknown Host: "+ uhe.getMessage());
+		}
+		catch(IOException ioe){
+			System.out.println("Unexpected exception: "+ ioe.getMessage());
+		}
+			
+		
+	}
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

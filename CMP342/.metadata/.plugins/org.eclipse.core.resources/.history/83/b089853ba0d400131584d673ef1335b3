@@ -1,0 +1,108 @@
+package Client;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+import Application.ClientApp;
+import Interface.FCTA;
+
+public class ChatClient implements Runnable{
+
+	private Socket socket;
+	private DataOutputStream streamOut;
+	private Thread thread;
+	private boolean done;
+	private ChatClinetThread client;
+	private BufferedReader console;
+	FCTA comm;
+	
+	
+	public ChatClient(String serverName, int serverPort, ClientApp app){
+		
+		try{
+			socket = new Socket(serverName, serverPort);
+			//System.out.println("Connected to socket: " + socket);
+			comm = (FCTA) app;
+			start();
+		}
+		catch(UnknownHostException uhe){
+			//System.out.println("Error Unknown Host: "+ uhe.getMessage());
+		}
+		catch(IOException ioe){
+			//System.out.println("Unexpected exception: "+ ioe.getMessage());
+		}
+			
+		
+	}
+	private void start() throws IOException {
+		console = new BufferedReader(new InputStreamReader(System.in));
+		streamOut = new DataOutputStream(socket.getOutputStream());
+		if(thread == null){
+			client = new ChatClinetThread(this,socket);
+			thread = new Thread(this);
+		
+			
+		}
+		
+	}
+	
+	
+	public void run(){
+		
+	}
+	
+	
+	public void sendmessage(String message){
+		try {
+			streamOut.writeUTF(message);
+			streamOut.flush();
+			comm.appendMessage(message);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void stop() {
+		done = true;
+		if(thread!=null){
+			thread =null;
+		}
+	
+		if(streamOut != null)
+			try {
+				if(streamOut != null)streamOut.close();
+				if(socket != null) socket.close();
+				if(client != null) client = null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	
+	}
+	public void handle(String message) {
+		//Receiving Messages
+		if(message.equalsIgnoreCase("bye")){
+			// BYE
+		}
+		else{
+			// Here is the Part send Message to Application
+			comm.appendMessage(message);			
+		}
+		
+	}
+	public void sendMessage(String message) throws IOException{
+		streamOut.writeUTF(message);
+		streamOut.flush();
+	}
+
+	
+
+}

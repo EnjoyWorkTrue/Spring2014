@@ -1,0 +1,29 @@
+package Server;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
+public class ChatServerThread extends Thread{
+	
+	private ChatServer server;
+	private Socket socket;
+	private DataInputStream streamIn;
+	private DataOutputStream streamOut;
+
+	public ChatServerThread(ChatServer server,Socket socket){
+		this.server = server;
+		this.socket = socket;
+		int ID = socket.getPort();
+	}
+
+	public void open() throws IOException {
+		streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+		streamOut = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+	}
+	
+
+}
