@@ -1,0 +1,14 @@
+package Enc_Dec;
+
+public class Decryption {
+	private String key;
+	private String encV;
+	public Decryption(String key,String encV){
+		this.key = key;
+		this.encV = encV;
+	}
+	public boolean isDecryptable(){
+		return key.length() == encV.length();
+	}
+
+}

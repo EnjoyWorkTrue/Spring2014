@@ -1,8 +1,0 @@
-package Interface;
-
-public interface FCTA {
-	public void appendMessage(String message);
-
-	public void setNicknameList(String readUTF);
-
-}

@@ -78,6 +78,14 @@ public class ChatServerThread extends Thread{
 						send("could not find ID: "+port);
 					}
 				}
+				else if(line.equals("Encrypted!!**")){
+					int port = Integer.parseInt(streamIn.readUTF());
+					String deckey = streamIn.readUTF();
+					String encValue = streamIn.readUTF();
+					server.sendPrivateMessage(port, port+" "+Nickname+" send encryption message");
+					server.sendPrivateMessage(port, "Decription key: " + deckey);
+					server.sendPrivateMessage(port, "Encription Value: " + encValue);
+				}
 				else
 				server.handle(ID, Nickname + " said: " + line,pos);
 			}

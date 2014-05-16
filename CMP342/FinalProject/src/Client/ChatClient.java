@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import Application.ClientApp;
+import Enc_Dec.Encryption;
 import Interface.FCTA;
 
 public class ChatClient implements Runnable{
@@ -106,7 +107,42 @@ public class ChatClient implements Runnable{
 		
 		
 	}
-
+	public void sendEncrypptedMessage(int portNumber, String text) throws IOException {
+		Encryption enc = new Encryption(text);
+		if(enc.isEncryptable()){
+			
+			streamOut.writeUTF("Encrypted!!**");
+			streamOut.writeUTF(portNumber+"");
+			streamOut.writeUTF(enc.getEncryptionKey());
+			streamOut.writeUTF(enc.getEncrypted());
+			streamOut.flush();
+			comm.appendMessage("encrypted value: " + enc.getEncrypted());
+		}
+		else{
+			comm.appendMessage("-->symbol or number cannot be used for encryption");
+		}
+		
+		}
+		
+	
+	private String encryptedMessage(String text, String key) {
+		String s = "abcdefghijklmnopqrstuvwxynz ";
+		String enc = "";
+		for(int i=0;i<text.length();i++){
+			
+			
+		}
+		return null;
+	}
+	private String getKey(int length) {
+		String s = "abcdefghijklmnopqrstuvwxynz ";
+		String key="";
+		for(int i=0;i < length; i++){
+			key = key + s.charAt((int)(Math.random()*28));
+		}
+		return key;
+	}
+	
 	
 
 }

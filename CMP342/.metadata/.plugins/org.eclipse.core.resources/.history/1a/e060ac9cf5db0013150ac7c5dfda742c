@@ -1,0 +1,30 @@
+package Enc_Dec;
+
+public class Encryption {
+	private String text;
+	private String key;
+	private static String Charlist = "abcdefghijklmnopqrstuvwxynz ";
+
+	public Encryption(String text) {
+		this.text = text;
+	}
+
+	public boolean isEncryptable() {
+		for (int i = 0; i < text.length(); i++) {
+
+			String test = "" + text.charAt(i);
+			if (!Charlist.contains(test)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	public String getEncryptionKey(){
+		String key="";
+		for(int i=0;i < text.length(); i++){
+			key = key + Charlist.charAt((int)(Math.random()*27));
+		}
+		return key;
+	}
+
+}

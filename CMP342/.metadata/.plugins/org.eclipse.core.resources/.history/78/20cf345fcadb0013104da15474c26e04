@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Sign in-LJ</title>
+
+<link rel="stylesheet" type="text/css"
+href="C:\Users\joseph\Documents\GitHub\Spring2014\CMP342\MainProject\WebContent\WEB-INF\css\login.css">
+<script type="text/javascript" src="C:\Users\joseph\Documents\GitHub\Spring2014\CMP342\MainProject\WebContent\WEB-INF\js\login.js"></script>
+
+</head>
+<body>
+<div id="head"></div>
+<div id="body">
+<div id = "background">
+		
+		<input type="text" id = "text1" >
+		<input type="password" id = "text2">
+		<input type="button" value="Login" onclick="move()">
+	
+</div>
+</div>
+<div id="tail"></div>
+
+</body>
+</html>

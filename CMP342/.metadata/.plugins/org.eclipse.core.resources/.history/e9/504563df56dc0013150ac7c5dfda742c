@@ -1,0 +1,24 @@
+package Enc_Dec;
+
+public class testENC_DEC {
+
+	public static void main(String[] args) {
+		Encryption enc = new Encryption("hello");
+		String key = null;
+		String encvalue = null;
+		if(enc.isEncryptable()){
+			key = enc.getEncryptionKey();
+			encvalue = enc.getEncrypted();
+		}
+		
+		
+		System.out.println("key = " + key);
+		System.out.println("encValue = " + encvalue);
+		
+		Decryption dec = new Decryption(key, encvalue);
+		if(dec.isDecryptable()){
+			
+		}
+	}
+
+}
