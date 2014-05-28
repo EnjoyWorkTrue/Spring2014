@@ -48,7 +48,6 @@ public class MyPullParser {
 		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 		factory.setNamespaceAware(true);
 		XmlPullParser xpp = factory.newPullParser();
-		// delete all data
 		mDb.cleanAllinfo();
 		xpp.setInput(new URL(url).openStream(), null);
 		int eventType = xpp.getEventType();

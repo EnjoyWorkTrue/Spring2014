@@ -28,7 +28,7 @@ public class getRssTask extends AsyncTask<Void, Void, String> {
 		long How = 15*60*1000;
 		while(true){			
 				try {					
-					Thread.sleep(How);
+					Thread.sleep(20*1000);
 					parser = MyPullParser.getInstance();
 					synchronized (parser) {
 						//get date from original recent published date
@@ -50,7 +50,7 @@ public class getRssTask extends AsyncTask<Void, Void, String> {
 					e1.printStackTrace();
 				}
 				//compare if original pub date is different from recent pubdate then notify
-				if(!before.equals(after)){
+				if(before.equals(after)){
 					giveNotification();
 				}
 				

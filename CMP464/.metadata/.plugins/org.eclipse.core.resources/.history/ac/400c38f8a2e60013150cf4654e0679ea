@@ -28,11 +28,13 @@ public class getRssTask extends AsyncTask<Void, Void, String> {
 		long How = 15*60*1000;
 		while(true){			
 				try {					
-					Thread.sleep(How);
+					Thread.sleep(20*1000);
 					parser = MyPullParser.getInstance();
 					synchronized (parser) {
 						//get date from original recent published date
 						before = parser.getFirstPubDate();
+						//delete all data from Database
+						parser.clearInfo();
 						parser.parse("http://rss.cnn.com/rss/cnn_topstories.rss");
 						// get first published date after download info 
 						after = parser.getFirstPubDate();	
@@ -50,7 +52,7 @@ public class getRssTask extends AsyncTask<Void, Void, String> {
 					e1.printStackTrace();
 				}
 				//compare if original pub date is different from recent pubdate then notify
-				if(!before.equals(after)){
+				if(before.equals(after)){
 					giveNotification();
 				}
 				

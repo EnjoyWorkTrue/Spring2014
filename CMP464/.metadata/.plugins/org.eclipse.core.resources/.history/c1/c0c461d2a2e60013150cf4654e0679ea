@@ -33,6 +33,8 @@ public class getRssTask extends AsyncTask<Void, Void, String> {
 					synchronized (parser) {
 						//get date from original recent published date
 						before = parser.getFirstPubDate();
+						//delete all data from Database
+						parser.clearInfo();
 						parser.parse("http://rss.cnn.com/rss/cnn_topstories.rss");
 						// get first published date after download info 
 						after = parser.getFirstPubDate();	
