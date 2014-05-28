@@ -1,0 +1,44 @@
+package com.example.assignment5.service;
+
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import Utils.MyPullParser;
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class getRssTask extends AsyncTask<Void, Void, String> {
+
+	public getRssTask(MyService myService) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected String doInBackground(Void... arg0) {
+		while(true){			
+				try {
+					Thread.sleep(10*1000);
+					MyPullParser parser = MyPullParser.getInstance();
+					Log.i("before", parser.getDescription().length+"");
+					parser.clearInfo();
+					parser.parse("http://rss.cnn.com/rss/cnn_topstories.rss");
+					Log.i("after", parser.getDescription().length+"");
+				} catch (XmlPullParserException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			
+			
+		}
+	}
+
+}

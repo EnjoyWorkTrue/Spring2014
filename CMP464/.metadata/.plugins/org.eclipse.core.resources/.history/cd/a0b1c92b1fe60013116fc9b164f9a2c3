@@ -1,0 +1,50 @@
+package Service;
+
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import com.example.assignment5.MainActivity;
+
+import Utils.MyPullParser;
+import android.app.IntentService;
+import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
+
+public class HelloIntentService extends IntentService{
+	
+	public HelloIntentService(){
+		super("HelloIntentService");
+	}
+
+	@Override
+	protected void onHandleIntent(Intent arg0) {
+		(new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					final MyPullParser parser = new MyPullParser(getApplicationContext());
+					parser.parse("http://rss.cnn.com/rss/cnn_topstories.rss");
+					runOnUiThread(new Runnable(){
+						@Override
+						public void run() {
+							
+						}
+					});
+				} catch (XmlPullParserException e) {
+					Log.i("main","XmlPullParserException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					Log.i("main","printStackTrace");
+					e.printStackTrace();
+				}
+			}
+        })).start();
+	  }
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+		return super.onStartCommand(intent, flags, startId);
+	}
+}

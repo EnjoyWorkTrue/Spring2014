@@ -1,0 +1,116 @@
+package Utils;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import Database.DbManager;
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+
+public class MyPullParser {
+
+	private ArrayList<RssItem> items = new ArrayList<RssItem>();
+	private RssItem currentItem = null;
+	private static DbManager mDb;
+	private static MyPullParser myPullParser;
+
+	private MyPullParser(Context ctx) {
+		if (mDb == null) {
+			mDb = new DbManager(ctx);
+			mDb.open();
+		}
+	}
+	
+	public static MyPullParser getInstance(Context ctx) {
+		if (myPullParser == null) {
+			myPullParser = new MyPullParser(ctx);
+		}
+		return myPullParser;
+	}
+	
+	public static MyPullParser getInstance() {
+		return myPullParser;
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		mDb.close();
+		super.finalize();
+	}
+
+	public void parse(String url) throws XmlPullParserException, IOException {
+		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		XmlPullParser xpp = factory.newPullParser();
+
+		xpp.setInput(new URL(url).openStream(), null);
+		int eventType = xpp.getEventType();
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			if (eventType == XmlPullParser.START_DOCUMENT) {
+				Log.i("MyPullParser", "downloading document");
+			} else if (eventType == XmlPullParser.START_TAG) {
+				if (xpp.getName().equals("item"))
+					currentItem = new RssItem();
+
+				else if (xpp.getName().equals("title") && currentItem != null)
+					currentItem.title = xpp.nextText();
+
+				else if (xpp.getName().equals("description")
+						&& currentItem != null)
+					currentItem.description = xpp.nextText();
+				else if (xpp.getName().equals("pubDate") && currentItem != null)
+					currentItem.pubdate = xpp.nextText();
+
+			} else if (eventType == XmlPullParser.END_TAG) {
+				if (xpp.getName().equals("item")) {
+					mDb.add_title(currentItem.title, currentItem.description,
+							currentItem.pubdate);
+					items.add(currentItem);
+				}
+			}
+			eventType = xpp.next();
+		}
+	}
+
+	public String[] getDescription() {
+		Cursor c = mDb.getDescription();
+		c.moveToFirst();
+		String[] des = new String[c.getCount()];
+		for (int i = 0; i < des.length; i++) {
+			des[i] = c.getString(c
+					.getColumnIndex(DbManager.FeedEntry.COLUMN_NAME_BODY));
+			c.moveToNext();
+		}
+		return des;
+	}
+
+	public ArrayList<RssItem> getItems() {
+		return items;
+	}
+	public String getFirstPubDate(){
+		Cursor c = mDb.firstPubdate();
+		c.moveToFirst();		
+		return c.getString(c.getColumnIndex(DbManager.FeedEntry.COLUMN_NAME_BODY2));
+	}
+	public void clearInfo(){
+		mDb.cleanAllinfo();
+	}
+
+	public ArrayList<String> getTitle() {
+		ArrayList<String> title = new ArrayList<String>();
+		Cursor c = mDb.getTitle();
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			title.add(c.getString(c
+					.getColumnIndex(DbManager.FeedEntry.COLUMN_NAME_TITLE)));
+			c.moveToNext();
+		}
+		return title;
+	}
+}

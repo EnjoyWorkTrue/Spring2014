@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 
@@ -24,6 +25,7 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toast.makeText(this, "before Thread", 0).show();
         (new Thread(new Runnable(){
 			@Override
 			public void run() {
@@ -45,11 +47,12 @@ public class MainActivity extends Activity{
 				}
 			}
         })).start();
+        Toast.makeText(this, "after Thread", 0).show();
        
     }
  
     private void setUpUiAfterParse(final MyPullParser parser){
-		
+    	Toast.makeText(this, "setUpUiAfterParse", 0).show();
 		mAdapter = new ArrayAdapter<String>(this, 
 				android.R.layout.simple_list_item_1, 
 				new ArrayList<String>(parser.getTitle()));

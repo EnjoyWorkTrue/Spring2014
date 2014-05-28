@@ -18,6 +18,8 @@ public class Description extends Activity {
 	private MenuItem editMenu_button;
 	private MenuItem addMenu_button;
 	private NotesDbAdapter mDbHelper;
+	
+	private String des;
 	private String TableName;
 	private String title;
 	private long idN;
@@ -27,17 +29,12 @@ public class Description extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_description);
 		// get Title and Description
-		Intent intent = getIntent();
-		title = intent.getStringExtra("title");
-		idN = intent.getLongExtra("id", 0);
-		String des = intent.getStringExtra("description");
-		TableName = intent.getStringExtra("tableName");
+		getInfo_from_previousActivity();
 		// setText and getText
 		tv = (TextView) findViewById(R.id.textView1);
 		et = (EditText) findViewById(R.id.editText1);
 		// EditText make it invisible firsttime
 		et.setVisibility(TextView.INVISIBLE);
-		// get Description
 		tv.setText(des);
 		// open database manager
 		mDbHelper = new NotesDbAdapter(this);
@@ -47,6 +44,14 @@ public class Description extends Activity {
 		ActionBar ac = getActionBar();
 		ac.setTitle(title);
 		//
+	}
+
+	private void getInfo_from_previousActivity() {
+		Intent intent = getIntent();
+		title = intent.getStringExtra("title");
+		idN = intent.getLongExtra("id", 0);
+		des = intent.getStringExtra("description");
+		TableName = intent.getStringExtra("tableName");		
 	}
 
 	@Override
@@ -74,7 +79,7 @@ public class Description extends Activity {
 	private void addText() {
 		String des = et.getText().toString();
 		mDbHelper.updateNote(idN, title, des, TableName);
-		tv.setText(et.getText().toString());
+		tv.setText(des);
 		tv.setVisibility(View.VISIBLE);
 		et.setVisibility(View.INVISIBLE);
 		editMenu_button.setVisible(true);

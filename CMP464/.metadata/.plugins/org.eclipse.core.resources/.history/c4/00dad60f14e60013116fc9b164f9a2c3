@@ -1,0 +1,51 @@
+package com.example.assignment5;
+
+import Database.DbManager;
+import android.app.ListFragment;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class MyListFragment extends ListFragment {
+	ArrayAdapter<String> adapter;
+	private String[] des;
+	View prev = null;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,new String[]{"Loding"});
+		setListAdapter(adapter);
+		return inflater.inflate(R.layout.my_list, container,false);
+	}
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		DescriptionFragment fragB = (DescriptionFragment) getFragmentManager().findFragmentByTag("desFrag");
+		fragB.setText(des[position]);
+		
+	}
+
+	public void chageAdapter(Cursor c) {
+		String[] from = new String[]{DbManager.FeedEntry.COLUMN_NAME_TITLE};
+		int[] to = new int[]{android.R.id.text1};
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),android.R.layout.simple_list_item_1,c,from,to);
+		setListAdapter(adapter);
+		
+	}
+
+	public void pushDescriptionList(String[] description) {
+		des = description;
+		
+	}
+
+
+}

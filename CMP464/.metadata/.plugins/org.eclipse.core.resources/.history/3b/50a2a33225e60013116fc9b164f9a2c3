@@ -1,0 +1,26 @@
+package Database;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class getRssTask extends AsyncTask<Void, Void, String> {
+
+	public getRssTask(MyService myService) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected String doInBackground(Void... arg0) {
+		while(true){
+			try {
+				Thread.sleep(10*1000);
+				Log.i("getRssTask","10 seconds");
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+}

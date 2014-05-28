@@ -1,8 +1,13 @@
 package com.example.notepad;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import utils.DialogButton;
 import utils.NotesDbAdapter;
+import utils.TodayDate;
 import utils.getCursor;
+import Object.title;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -10,13 +15,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class Activity2 extends Activity implements getCursor {
 	private String intent_title = "title";
@@ -26,12 +32,14 @@ public class Activity2 extends Activity implements getCursor {
 	private static SimpleCursorAdapter notes;
 	private ListView lv;
 	private String TableName;
+	ArrayAdapter adapter;
 	Context ctx; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ctx = this;
 		setContentView(R.layout.activity_activity2);
+		ctx = this;
+		//get Table Name passed by MainActivity
 		Intent intent = getIntent();
 		TableName = intent.getStringExtra("Title");
 		//change Title Name
@@ -40,18 +48,27 @@ public class Activity2 extends Activity implements getCursor {
 		//////
 		mDbHelper = new NotesDbAdapter(this);
 		mDbHelper.open();
-		mDbHelper.getTable(TableName);
 		startListActivity();
+		
+		TodayDate hello = new TodayDate();		
+		Toast.makeText(this, hello.getDay(), 0).show();
+		Toast.makeText(this, hello.getDate(), 1).show();
+		
 		
 	}
 	private void startListActivity() {
+		//dapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
+		//adapter.addAll(addItems());
+		////		
 		Cursor c = mDbHelper.fetchAllNotes(TableName);
 		String[] from = new String[]{NotesDbAdapter.KEY_TITLE};
 		int[] to = new int[] {android.R.id.text1 };
 		notes = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,c,from, to);
 		
+		////
 		lv = (ListView) findViewById(R.id.titleList2);
-		lv.setAdapter(notes);
+		lv.setAdapter(adapter);
+		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -74,6 +91,19 @@ public class Activity2 extends Activity implements getCursor {
 		
 			
 		});
+	}
+	private Set<String> addItems() {
+		Set<String> a = new TreeSet();
+		Cursor c = mDbHelper.fetchAllNotes(TableName);
+		c.moveToFirst();
+		while(!c.isAfterLast()){
+			a.add(c.getColumnName(1));
+			c.moveToNext();
+		}
+		c.close();
+		
+		return a;
+		
 	}
 	private void startActivity(String title,String des,long idNum) {
 		Intent intent = new Intent(this,Description.class);
@@ -101,11 +131,13 @@ public class Activity2 extends Activity implements getCursor {
 	private void add() {
 		DialogButton a = new DialogButton(ctx,TableName);
 		a.createAdd();
-		a.show();		
+		a.show();
+		
 	}
 	@Override
-	public void getNewAdapter() {
+	public void getNewAdapter() {		
 		notes.changeCursor(mDbHelper.fetchAllNotes(TableName));
+		
 		
 	}
 

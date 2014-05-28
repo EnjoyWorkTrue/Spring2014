@@ -1,5 +1,7 @@
 package com.example.notepad;
 
+import java.util.ArrayList;
+
 import utils.DialogButton;
 import utils.NotesDbAdapter;
 import utils.getCursor;
@@ -12,16 +14,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements getCursor{
 	int count = 1;
+	Cursor cursor;
 	private ListView lv;
 	private NotesDbAdapter mDbHelper;
 	private static SimpleCursorAdapter notes;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,10 +36,10 @@ public class MainActivity extends Activity implements getCursor{
 	}
 
 	private void startListActivity() {
-		Cursor c = mDbHelper.fetchAllNotes();
+		cursor = mDbHelper.fetchAllNotes();
 		String[] from = new String[]{NotesDbAdapter.KEY_TITLE};
 		int[] to = new int[] { android.R.id.text1 };
-		notes = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,c,from, to);
+		notes = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursor,from, to);
 		lv = (ListView) findViewById(R.id.titleList);
 		lv.setAdapter(notes);
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -56,7 +60,7 @@ public class MainActivity extends Activity implements getCursor{
 				return false;
 			}
 		});
-				
+			
 	}
 	protected void startActivity2(String s) {
 		Intent intent = new Intent(this,Activity2.class);
@@ -84,17 +88,23 @@ public class MainActivity extends Activity implements getCursor{
 		a.show();
 		
 	}
+	
 	private void delete(long arg3) {
 		Cursor c = mDbHelper.fetchNote(arg3);		
 		mDbHelper.deleteNote(arg3);
+		mDbHelper.deleteTable(c.getString(1));
 		c = mDbHelper.fetchAllNotes();
 		notes.changeCursor(c);
 	}
-
 	@Override
 	public void getNewAdapter() {
 		notes.changeCursor(mDbHelper.fetchAllNotes());
 		
+	}
+	@Override
+	protected void onDestroy() {
+		mDbHelper.close();
+		super.onDestroy();
 	}
 
 }

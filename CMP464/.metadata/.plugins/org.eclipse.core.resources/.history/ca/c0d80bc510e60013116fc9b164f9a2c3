@@ -1,0 +1,89 @@
+package Utils;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import Database.DbManager;
+import android.content.Context;
+import android.util.Log;
+public class MyPullParser {
+	
+	private ArrayList<RssItem> items = new ArrayList<RssItem>();
+	private RssItem currentItem = null;
+
+	private DbManager mDb;
+	
+
+	public MyPullParser(Context ctx) {
+		mDb = new DbManager(ctx);
+		mDb.open();
+	}
+
+	public void parse(String url) throws XmlPullParserException, IOException{
+		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		XmlPullParser xpp = factory.newPullParser();
+
+		xpp.setInput(new URL(url).openStream(),null);
+		int eventType = xpp.getEventType();
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			if(eventType == XmlPullParser.START_DOCUMENT) {
+				Log.i("MyPullParser","Start document");
+			} 
+			else if(eventType == XmlPullParser.START_TAG) 
+			{
+				Log.d("MyPullParser", xpp.getName());
+				if(xpp.getName().equals("item"))				
+					currentItem = new RssItem();
+				
+				else if(xpp.getName().equals("title") && currentItem != null){				
+					String title = xpp.nextText();	
+					currentItem.title = title;
+				}
+				else if(xpp.getName().equals("description") && currentItem != null)	{			
+					String body = xpp.nextText();
+					currentItem.description = body;
+				}
+				else if(xpp.getName().equals("pubDate") && currentItem != null){
+					String pubDate = xpp.nextText();
+					currentItem.pubdate = pubDate;
+				}
+							
+				
+			} 
+			else if(eventType == XmlPullParser.END_TAG) {
+				if(xpp.getName().equals("item")){
+					items.add(currentItem);
+					
+				}
+			}
+			eventType = xpp.next();
+		}
+		Log.i("MyPullParser","End document");
+		Log.i("MyPullParser","We received: "+items.size());
+	}
+	
+	public String[] getDescription(){
+		String[] des = new String[items.size()];
+		for(int i=0; i<des.length;i++){
+			des[i] = items.get(i).pubdate;
+		}
+		return des;
+	}
+	
+	public ArrayList<RssItem> getItems(){
+		return items;
+	}
+	public ArrayList<String> getTitle() {
+		ArrayList<String> title = new ArrayList<String>();
+		for(int i=0; i<items.size();i++){
+			title.add(items.get(i).title);
+		}
+		return title;
+	}
+}

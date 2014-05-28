@@ -1,10 +1,13 @@
 package utils;
 
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class DialogButton extends AlertDialog.Builder{
 	getCursor cursor;
@@ -12,6 +15,7 @@ public class DialogButton extends AlertDialog.Builder{
 	String TableName;
 	private NotesDbAdapter mDbHelper;
 	long id;
+	private ArrayList<String> names;
 	public DialogButton(Context arg0,String TB,long id) {
 		super(arg0);
 		ctx = arg0;
@@ -79,13 +83,28 @@ public class DialogButton extends AlertDialog.Builder{
         edit.setTextSize(23);
         setView(edit);
         setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+        	
+        	
 
             public void onClick(DialogInterface dialog, int which) {
             	//create Table if not exists
-            	if (!(edit.getText().toString()).equals(""))
+            	if(edit.getText().toString().contains(" ")){
+            		Toast.makeText(ctx, "no space", Toast.LENGTH_SHORT);            		
+            	}
+            	else if (!(edit.getText().toString()).equals("")){       
+            		if(!names.contains(edit.getText().toString())){
                    	mDbHelper.createNote(edit.getText().toString(), "");
-            	cursor = (getCursor) ctx;
-            	cursor.getNewAdapter();
+            		cursor = (getCursor) ctx;
+                	cursor.getNewAdapter();
+           
+                	}
+            		else
+            		{
+            			Toast.makeText(ctx, "sameName", Toast.LENGTH_SHORT).show();
+            			createTable();
+            		}
+            	}
+            	
 
             }
         });
@@ -93,6 +112,11 @@ public class DialogButton extends AlertDialog.Builder{
 	private void openDB() {
 		mDbHelper = new NotesDbAdapter(ctx);
 		mDbHelper.open();
+		
+	}
+
+	public void setArraylist(ArrayList<String> names) {
+		this.names = names;
 		
 	}
 	

@@ -1,0 +1,31 @@
+package com.example.assignment5;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class DescriptionFragment extends Fragment{
+	TextView tv;
+	String des="hello";
+	View view;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.description, container,false);
+		tv = (TextView) view.findViewById(R.id.textView1);
+		tv.setText(des);
+		return view;
+	}
+	public void setText(String a){
+		tv.setText(a);
+	}
+
+}

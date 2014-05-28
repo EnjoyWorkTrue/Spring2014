@@ -1,0 +1,13 @@
+package Database;
+
+import android.os.AsyncTask;
+
+public class getRssTask extends AsyncTask<Void, Void, String> {
+
+	@Override
+	protected String doInBackground(Void... arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

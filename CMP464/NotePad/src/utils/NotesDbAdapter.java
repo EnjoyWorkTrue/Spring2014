@@ -26,6 +26,7 @@ public class NotesDbAdapter {
 	private final Context mCtx;
 	
 	private static class DatabaseHelper extends SQLiteOpenHelper{
+		
 		DatabaseHelper(Context context){
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		}
@@ -96,7 +97,6 @@ public class NotesDbAdapter {
 
     }
 	public boolean deleteNote(long rowId) {
-
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 	public boolean deleteNote(long rowId,String Table_Name) {
@@ -129,6 +129,11 @@ public class NotesDbAdapter {
 		createTable(TableName);
 		//return mDb.query(TableName, new String[]{KEY_ROWID,KEY_TITLE },null, null, null, null,null);
 		
+	}
+	public void deleteTable(String tableName){
+		String DATABASE_DELETE = 
+				"drop table " + tableName;
+		mDb.execSQL(DATABASE_DELETE);
 	}
 	private Cursor createTable(String tableName) {
 		String DATABASE_CREATE =
